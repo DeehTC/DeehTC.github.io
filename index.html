@@ -38,6 +38,11 @@
             border-color: #3B82F6;
             box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
         }
+        .helper-text {
+            font-size: 0.875rem;
+            color: #6B7280;
+            margin-top: 0.25rem;
+        }
         .metric-card {
             border-left: 4px solid;
             padding: 1rem;
@@ -56,29 +61,44 @@
             <p class="text-lg text-gray-600 mt-2">Clínica Psicológica Compartilhada</p>
         </header>
 
-        <!-- Seção de Investimento Inicial -->
+        <!-- Seção de Parâmetros Gerais -->
         <div class="card">
-            <h2 class="text-2xl font-semibold mb-4 border-b pb-2">1. Investimento Inicial</h2>
-            <p class="mb-4">O primeiro passo é o capital necessário para mobiliar e preparar o espaço. Este é um custo único.</p>
-            <div class="flex justify-between items-center bg-gray-100 p-4 rounded-lg">
-                <span class="text-lg">Móveis e Decoração:</span>
-                <span class="text-lg font-bold">R$ 7.500,00</span>
+            <h2 class="text-2xl font-semibold mb-4 border-b pb-2">1. Parâmetros Gerais do Negócio</h2>
+            <p class="mb-4">Comece definindo os valores base do seu negócio. Todos os cálculos usarão estes números como referência.</p>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="input-group">
+                    <label for="investimento_inicial">Investimento Inicial (Móveis, etc.)</label>
+                    <input type="number" id="investimento_inicial" value="7500">
+                    <p class="helper-text">Custo total para montar a clínica.</p>
+                </div>
+                <div class="input-group">
+                    <label for="num_investidores">Número de Sócios/Investidores</label>
+                    <input type="number" id="num_investidores" value="4">
+                     <p class="helper-text">Quantas pessoas dividirão o investimento e o lucro.</p>
+                </div>
+                <div class="input-group">
+                    <label for="preco_hora">Preço do Aluguel por Hora</label>
+                    <input type="number" id="preco_hora" value="20">
+                    <p class="helper-text">Valor cobrado dos profissionais por hora de uso da sala.</p>
+                </div>
             </div>
             <div class="mt-4 p-4 border border-blue-200 bg-blue-50 rounded-lg">
-                <h3 class="font-semibold text-blue-800">Divisão entre 4 investidores:</h3>
-                <p class="text-xl font-bold text-blue-900">R$ 1.875,00 por pessoa</p>
+                <h3 class="font-semibold text-blue-800">Investimento por Sócio:</h3>
+                <p id="investimento_socio" class="text-xl font-bold text-blue-900">R$ 1.875,00</p>
             </div>
         </div>
 
         <!-- Seção de Simulador Financeiro -->
         <div class="card">
             <h2 class="text-2xl font-semibold mb-4 border-b pb-2">2. Simulador Financeiro Mensal</h2>
-            <p class="mb-4">Use os campos abaixo para simular diferentes cenários. Adicionei estimativas para custos comuns, mas você pode ajustá-los.</p>
+            <p class="mb-4">Agora, detalhe seus custos fixos mensais e estime a quantidade de horas que serão alugadas. Os resultados serão calculados ao lado.</p>
             
             <div class="grid md:grid-cols-2 gap-8">
                 <!-- Coluna de Custos e Horas -->
                 <div>
-                    <h3 class="text-xl font-semibold mb-3">Custos e Horas Alugadas</h3>
+                    <h3 class="text-xl font-semibold mb-3">Entradas (Custos e Receitas)</h3>
+                    <p class="mb-4 text-sm text-gray-600">Ajuste os valores abaixo para refletir sua realidade.</p>
+                    
                     <!-- Custos Fixos -->
                     <div class="input-group">
                         <label for="aluguel">Aluguel do Espaço</label>
@@ -99,8 +119,8 @@
                     <hr class="my-6">
                     <!-- Horas Alugadas -->
                     <div class="input-group">
-                        <label for="horas_mae">Horas fixas (sua mãe)</label>
-                        <input type="number" id="horas_mae" value="16" readonly class="bg-gray-200">
+                        <label for="horas_mae">Horas estimadas (sua mãe)</label>
+                        <input type="number" id="horas_mae" value="16">
                     </div>
                     <div class="input-group">
                         <label for="horas_outra_psi">Horas estimadas (outra psicóloga)</label>
@@ -132,7 +152,7 @@
                     </div>
 
                     <div class="bg-green-100 p-4 rounded-lg text-center">
-                        <p class="font-semibold text-green-800">Lucro por Investidor</p>
+                        <p class="font-semibold text-green-800">Lucro por Sócio</p>
                         <p id="lucro_investidor" class="text-3xl font-bold text-green-900">R$ 0,00</p>
                     </div>
                 </div>
@@ -142,6 +162,7 @@
         <!-- Seção de Métricas e Análise -->
         <div class="card">
             <h2 class="text-2xl font-semibold mb-4 border-b pb-2">3. Análise e Métricas Importantes</h2>
+            <p class="mb-4">Estes são os indicadores chave de saúde do seu negócio. Eles mostram a meta mínima para não ter prejuízo e o potencial de crescimento.</p>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="metric-card border-yellow-500 bg-yellow-50">
                     <p class="font-semibold text-yellow-800">Ponto de Equilíbrio</p>
@@ -156,12 +177,12 @@
                 <div class="metric-card border-green-500 bg-green-50">
                     <p class="font-semibold text-green-800">Taxa de Ocupação</p>
                     <p id="taxa_ocupacao" class="text-xl font-bold text-green-900">0%</p>
-                    <p class="text-sm text-green-700">Baseado em 880h/mês disponíveis.</p>
+                    <p class="text-sm text-green-700">Baseado em 880h/mês disponíveis (4 salas, 10h/dia, 22 dias).</p>
                 </div>
                 <div class="metric-card border-gray-500 bg-gray-100">
                     <p class="font-semibold text-gray-800">Payback do Investimento</p>
                     <p id="payback" class="text-xl font-bold text-gray-900">N/A</p>
-                    <p class="text-sm text-gray-700">Tempo para recuperar o investimento inicial.</p>
+                    <p class="text-sm text-gray-700">Tempo para recuperar o investimento inicial com o lucro atual.</p>
                 </div>
             </div>
         </div>
@@ -173,19 +194,20 @@
                 <li><strong>Formalização:</strong> É crucial criar um contrato social para a empresa, definindo a participação, responsabilidades e a forma de distribuição de lucros de cada sócio.</li>
                 <li><strong>Capital de Giro:</strong> Além do investimento inicial, é prudente ter um capital de giro para cobrir os custos dos primeiros 2-3 meses, antes que o negócio atinja o ponto de equilíbrio de forma consistente.</li>
                 <li><strong>Marketing e Captação:</strong> O sucesso dependerá da ocupação das salas. O trabalho de marketing para atrair outros profissionais é vital. Pense em anúncios, parcerias e presença online.</li>
-                <li><strong>Precificação:</strong> O valor de R$ 20/hora é competitivo? Faça uma pesquisa de mercado na sua região para confirmar se o preço está adequado.</li>
                 <li><strong>Regras de Uso:</strong> Definam regras claras para o uso do espaço (agendamento, cancelamento, limpeza, etc.) para evitar conflitos.</li>
             </ul>
         </div>
     </div>
 
     <script>
-        // Script para cálculos financeiros
-        const PRECO_HORA = 20;
-        const INVESTIMENTO_INICIAL = 7500;
         const HORAS_TOTAIS_DISPONIVEIS = 4 * 10 * 22; // 4 salas, 10h/dia, 22 dias/mês
 
-        // Inputs
+        // Inputs Gerais
+        const inputInvestimentoInicial = document.getElementById('investimento_inicial');
+        const inputNumInvestidores = document.getElementById('num_investidores');
+        const inputPrecoHora = document.getElementById('preco_hora');
+
+        // Inputs Financeiros
         const inputAluguel = document.getElementById('aluguel');
         const inputUtilidades = document.getElementById('utilidades');
         const inputLimpeza = document.getElementById('limpeza');
@@ -195,6 +217,7 @@
         const inputHorasAdicionais = document.getElementById('horas_adicionais');
 
         // Outputs
+        const outputInvestimentoSocio = document.getElementById('investimento_socio');
         const outputCustoTotal = document.getElementById('custo_total');
         const outputReceitaTotal = document.getElementById('receita_total');
         const outputLucroTotal = document.getElementById('lucro_total');
@@ -209,35 +232,43 @@
         }
 
         function calcular() {
-            // 1. Calcular Custos
+            // 1. Ler Parâmetros Gerais
+            const investimentoInicial = parseFloat(inputInvestimentoInicial.value) || 0;
+            const numInvestidores = parseInt(inputNumInvestidores.value) || 1;
+            const precoHora = parseFloat(inputPrecoHora.value) || 0;
+
+            const investimentoPorSocio = investimentoInicial / numInvestidores;
+            outputInvestimentoSocio.textContent = formatCurrency(investimentoPorSocio);
+
+            // 2. Calcular Custos
             const custoAluguel = parseFloat(inputAluguel.value) || 0;
             const custoUtilidades = parseFloat(inputUtilidades.value) || 0;
             const custoLimpeza = parseFloat(inputLimpeza.value) || 0;
             const custoOutros = parseFloat(inputOutros.value) || 0;
             const custoTotal = custoAluguel + custoUtilidades + custoLimpeza + custoOutros;
 
-            // 2. Calcular Receita
+            // 3. Calcular Receita
             const horasMae = parseInt(inputHorasMae.value) || 0;
             const horasOutraPsi = parseInt(inputHorasOutraPsi.value) || 0;
             const horasAdicionais = parseInt(inputHorasAdicionais.value) || 0;
             const totalHorasAlugadas = horasMae + horasOutraPsi + horasAdicionais;
-            const receitaTotal = totalHorasAlugadas * PRECO_HORA;
+            const receitaTotal = totalHorasAlugadas * precoHora;
 
-            // 3. Calcular Lucro
+            // 4. Calcular Lucro
             const lucroTotal = receitaTotal - custoTotal;
-            const lucroInvestidor = lucroTotal > 0 ? lucroTotal / 4 : 0;
+            const lucroInvestidor = lucroTotal > 0 ? lucroTotal / numInvestidores : 0;
 
-            // 4. Calcular Métricas
-            const pontoEquilibrioHoras = Math.ceil(custoTotal / PRECO_HORA);
+            // 5. Calcular Métricas
+            const pontoEquilibrioHoras = precoHora > 0 ? Math.ceil(custoTotal / precoHora) : Infinity;
             const taxaOcupacao = (totalHorasAlugadas / HORAS_TOTAIS_DISPONIVEIS) * 100;
             
             let paybackMeses = "N/A";
             if (lucroTotal > 0) {
-                const meses = Math.ceil(INVESTIMENTO_INICIAL / lucroTotal);
+                const meses = Math.ceil(investimentoInicial / lucroTotal);
                 paybackMeses = `${meses} meses`;
             }
 
-            // 5. Atualizar a UI
+            // 6. Atualizar a UI
             outputCustoTotal.textContent = formatCurrency(custoTotal);
             outputReceitaTotal.textContent = formatCurrency(receitaTotal);
             outputLucroTotal.textContent = formatCurrency(lucroTotal);
@@ -245,14 +276,18 @@
             
             outputLucroTotal.className = `text-2xl font-bold ${lucroTotal >= 0 ? 'text-green-600' : 'text-red-600'}`;
 
-            outputPontoEquilibrio.textContent = `${pontoEquilibrioHoras} horas/mês`;
+            outputPontoEquilibrio.textContent = pontoEquilibrioHoras === Infinity ? 'N/A' : `${pontoEquilibrioHoras} horas/mês`;
             outputTotalHoras.textContent = `${totalHorasAlugadas} horas/mês`;
             outputTaxaOcupacao.textContent = `${taxaOcupacao.toFixed(1)}%`;
             outputPayback.textContent = paybackMeses;
         }
 
         // Adicionar listeners para recalcular ao mudar os valores
-        const inputs = [inputAluguel, inputUtilidades, inputLimpeza, inputOutros, inputHorasOutraPsi, inputHorasAdicionais];
+        const inputs = [
+            inputInvestimentoInicial, inputNumInvestidores, inputPrecoHora,
+            inputAluguel, inputUtilidades, inputLimpeza, inputOutros, 
+            inputHorasMae, inputHorasOutraPsi, inputHorasAdicionais
+        ];
         inputs.forEach(input => {
             input.addEventListener('input', calcular);
         });
