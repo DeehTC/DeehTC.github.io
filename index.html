@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise Financeira - Clínica Psicológica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .input-group {
+            margin-bottom: 1rem;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #374151;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #D1D5DB;
+            border-radius: 0.375rem;
+            transition: border-color 0.2s;
+        }
+        .input-group input:focus {
+            outline: none;
+            border-color: #3B82F6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
+        }
+        .metric-card {
+            border-left: 4px solid;
+            padding: 1rem;
+        }
+        .metric-card.border-blue-500 { border-color: #3B82F6; }
+        .metric-card.border-red-500 { border-color: #EF4444; }
+        .metric-card.border-green-500 { border-color: #22C55E; }
+        .metric-card.border-yellow-500 { border-color: #EAB308; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Análise de Viabilidade Financeira</h1>
+            <p class="text-lg text-gray-600 mt-2">Clínica Psicológica Compartilhada</p>
+        </header>
+
+        <!-- Seção de Investimento Inicial -->
+        <div class="card">
+            <h2 class="text-2xl font-semibold mb-4 border-b pb-2">1. Investimento Inicial</h2>
+            <p class="mb-4">O primeiro passo é o capital necessário para mobiliar e preparar o espaço. Este é um custo único.</p>
+            <div class="flex justify-between items-center bg-gray-100 p-4 rounded-lg">
+                <span class="text-lg">Móveis e Decoração:</span>
+                <span class="text-lg font-bold">R$ 7.500,00</span>
+            </div>
+            <div class="mt-4 p-4 border border-blue-200 bg-blue-50 rounded-lg">
+                <h3 class="font-semibold text-blue-800">Divisão entre 4 investidores:</h3>
+                <p class="text-xl font-bold text-blue-900">R$ 1.875,00 por pessoa</p>
+            </div>
+        </div>
+
+        <!-- Seção de Simulador Financeiro -->
+        <div class="card">
+            <h2 class="text-2xl font-semibold mb-4 border-b pb-2">2. Simulador Financeiro Mensal</h2>
+            <p class="mb-4">Use os campos abaixo para simular diferentes cenários. Adicionei estimativas para custos comuns, mas você pode ajustá-los.</p>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Coluna de Custos e Horas -->
+                <div>
+                    <h3 class="text-xl font-semibold mb-3">Custos e Horas Alugadas</h3>
+                    <!-- Custos Fixos -->
+                    <div class="input-group">
+                        <label for="aluguel">Aluguel do Espaço</label>
+                        <input type="number" id="aluguel" value="2000">
+                    </div>
+                    <div class="input-group">
+                        <label for="utilidades">Contas (Luz, Água, Internet)</label>
+                        <input type="number" id="utilidades" value="400">
+                    </div>
+                    <div class="input-group">
+                        <label for="limpeza">Limpeza</label>
+                        <input type="number" id="limpeza" value="400">
+                    </div>
+                    <div class="input-group">
+                        <label for="outros">Outros (Contador, Software, Marketing)</label>
+                        <input type="number" id="outros" value="600">
+                    </div>
+                    <hr class="my-6">
+                    <!-- Horas Alugadas -->
+                    <div class="input-group">
+                        <label for="horas_mae">Horas fixas (sua mãe)</label>
+                        <input type="number" id="horas_mae" value="16" readonly class="bg-gray-200">
+                    </div>
+                    <div class="input-group">
+                        <label for="horas_outra_psi">Horas estimadas (outra psicóloga)</label>
+                        <input type="number" id="horas_outra_psi" value="20">
+                    </div>
+                    <div class="input-group">
+                        <label for="horas_adicionais">Horas adicionais (outros profissionais)</label>
+                        <input type="number" id="horas_adicionais" value="50">
+                    </div>
+                </div>
+
+                <!-- Coluna de Resultados -->
+                <div class="bg-gray-100 p-6 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-4">Resultados da Simulação</h3>
+                    
+                    <div class="metric-card border-red-500 bg-white mb-4">
+                        <p class="text-sm text-gray-600">Custo Mensal Total</p>
+                        <p id="custo_total" class="text-2xl font-bold text-red-600">R$ 0,00</p>
+                    </div>
+
+                    <div class="metric-card border-blue-500 bg-white mb-4">
+                        <p class="text-sm text-gray-600">Receita Mensal Total</p>
+                        <p id="receita_total" class="text-2xl font-bold text-blue-600">R$ 0,00</p>
+                    </div>
+
+                    <div class="metric-card border-green-500 bg-white mb-4">
+                        <p class="text-sm text-gray-600">Lucro/Prejuízo Mensal</p>
+                        <p id="lucro_total" class="text-2xl font-bold text-green-600">R$ 0,00</p>
+                    </div>
+
+                    <div class="bg-green-100 p-4 rounded-lg text-center">
+                        <p class="font-semibold text-green-800">Lucro por Investidor</p>
+                        <p id="lucro_investidor" class="text-3xl font-bold text-green-900">R$ 0,00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Seção de Métricas e Análise -->
+        <div class="card">
+            <h2 class="text-2xl font-semibold mb-4 border-b pb-2">3. Análise e Métricas Importantes</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="metric-card border-yellow-500 bg-yellow-50">
+                    <p class="font-semibold text-yellow-800">Ponto de Equilíbrio</p>
+                    <p id="ponto_equilibrio" class="text-xl font-bold text-yellow-900">0 horas/mês</p>
+                    <p class="text-sm text-yellow-700">Horas necessárias para cobrir os custos.</p>
+                </div>
+                <div class="metric-card border-blue-500 bg-blue-50">
+                    <p class="font-semibold text-blue-800">Total de Horas Alugadas</p>
+                    <p id="total_horas" class="text-xl font-bold text-blue-900">0 horas/mês</p>
+                    <p class="text-sm text-blue-700">Com base na simulação atual.</p>
+                </div>
+                <div class="metric-card border-green-500 bg-green-50">
+                    <p class="font-semibold text-green-800">Taxa de Ocupação</p>
+                    <p id="taxa_ocupacao" class="text-xl font-bold text-green-900">0%</p>
+                    <p class="text-sm text-green-700">Baseado em 880h/mês disponíveis.</p>
+                </div>
+                <div class="metric-card border-gray-500 bg-gray-100">
+                    <p class="font-semibold text-gray-800">Payback do Investimento</p>
+                    <p id="payback" class="text-xl font-bold text-gray-900">N/A</p>
+                    <p class="text-sm text-gray-700">Tempo para recuperar o investimento inicial.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Considerações Finais -->
+        <div class="card">
+            <h2 class="text-2xl font-semibold mb-4 border-b pb-2">4. Próximos Passos e Considerações</h2>
+            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                <li><strong>Formalização:</strong> É crucial criar um contrato social para a empresa, definindo a participação, responsabilidades e a forma de distribuição de lucros de cada sócio.</li>
+                <li><strong>Capital de Giro:</strong> Além do investimento inicial, é prudente ter um capital de giro para cobrir os custos dos primeiros 2-3 meses, antes que o negócio atinja o ponto de equilíbrio de forma consistente.</li>
+                <li><strong>Marketing e Captação:</strong> O sucesso dependerá da ocupação das salas. O trabalho de marketing para atrair outros profissionais é vital. Pense em anúncios, parcerias e presença online.</li>
+                <li><strong>Precificação:</strong> O valor de R$ 20/hora é competitivo? Faça uma pesquisa de mercado na sua região para confirmar se o preço está adequado.</li>
+                <li><strong>Regras de Uso:</strong> Definam regras claras para o uso do espaço (agendamento, cancelamento, limpeza, etc.) para evitar conflitos.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Script para cálculos financeiros
+        const PRECO_HORA = 20;
+        const INVESTIMENTO_INICIAL = 7500;
+        const HORAS_TOTAIS_DISPONIVEIS = 4 * 10 * 22; // 4 salas, 10h/dia, 22 dias/mês
+
+        // Inputs
+        const inputAluguel = document.getElementById('aluguel');
+        const inputUtilidades = document.getElementById('utilidades');
+        const inputLimpeza = document.getElementById('limpeza');
+        const inputOutros = document.getElementById('outros');
+        const inputHorasMae = document.getElementById('horas_mae');
+        const inputHorasOutraPsi = document.getElementById('horas_outra_psi');
+        const inputHorasAdicionais = document.getElementById('horas_adicionais');
+
+        // Outputs
+        const outputCustoTotal = document.getElementById('custo_total');
+        const outputReceitaTotal = document.getElementById('receita_total');
+        const outputLucroTotal = document.getElementById('lucro_total');
+        const outputLucroInvestidor = document.getElementById('lucro_investidor');
+        const outputPontoEquilibrio = document.getElementById('ponto_equilibrio');
+        const outputTotalHoras = document.getElementById('total_horas');
+        const outputTaxaOcupacao = document.getElementById('taxa_ocupacao');
+        const outputPayback = document.getElementById('payback');
+
+        function formatCurrency(value) {
+            return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+
+        function calcular() {
+            // 1. Calcular Custos
+            const custoAluguel = parseFloat(inputAluguel.value) || 0;
+            const custoUtilidades = parseFloat(inputUtilidades.value) || 0;
+            const custoLimpeza = parseFloat(inputLimpeza.value) || 0;
+            const custoOutros = parseFloat(inputOutros.value) || 0;
+            const custoTotal = custoAluguel + custoUtilidades + custoLimpeza + custoOutros;
+
+            // 2. Calcular Receita
+            const horasMae = parseInt(inputHorasMae.value) || 0;
+            const horasOutraPsi = parseInt(inputHorasOutraPsi.value) || 0;
+            const horasAdicionais = parseInt(inputHorasAdicionais.value) || 0;
+            const totalHorasAlugadas = horasMae + horasOutraPsi + horasAdicionais;
+            const receitaTotal = totalHorasAlugadas * PRECO_HORA;
+
+            // 3. Calcular Lucro
+            const lucroTotal = receitaTotal - custoTotal;
+            const lucroInvestidor = lucroTotal > 0 ? lucroTotal / 4 : 0;
+
+            // 4. Calcular Métricas
+            const pontoEquilibrioHoras = Math.ceil(custoTotal / PRECO_HORA);
+            const taxaOcupacao = (totalHorasAlugadas / HORAS_TOTAIS_DISPONIVEIS) * 100;
+            
+            let paybackMeses = "N/A";
+            if (lucroTotal > 0) {
+                const meses = Math.ceil(INVESTIMENTO_INICIAL / lucroTotal);
+                paybackMeses = `${meses} meses`;
+            }
+
+            // 5. Atualizar a UI
+            outputCustoTotal.textContent = formatCurrency(custoTotal);
+            outputReceitaTotal.textContent = formatCurrency(receitaTotal);
+            outputLucroTotal.textContent = formatCurrency(lucroTotal);
+            outputLucroInvestidor.textContent = formatCurrency(lucroInvestidor);
+            
+            outputLucroTotal.className = `text-2xl font-bold ${lucroTotal >= 0 ? 'text-green-600' : 'text-red-600'}`;
+
+            outputPontoEquilibrio.textContent = `${pontoEquilibrioHoras} horas/mês`;
+            outputTotalHoras.textContent = `${totalHorasAlugadas} horas/mês`;
+            outputTaxaOcupacao.textContent = `${taxaOcupacao.toFixed(1)}%`;
+            outputPayback.textContent = paybackMeses;
+        }
+
+        // Adicionar listeners para recalcular ao mudar os valores
+        const inputs = [inputAluguel, inputUtilidades, inputLimpeza, inputOutros, inputHorasOutraPsi, inputHorasAdicionais];
+        inputs.forEach(input => {
+            input.addEventListener('input', calcular);
+        });
+
+        // Calcular na carga inicial da página
+        window.onload = calcular;
+    </script>
+</body>
+</html>
